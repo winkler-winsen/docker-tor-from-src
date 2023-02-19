@@ -23,10 +23,15 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y build-essential l
     ./configure && make -j $CompilerThreads &&\
     make install
 
-FROM debian
+FROM debian:stable-slim
 COPY --from=builder /usr/local/bin/tor* /usr/local/bin/.
 COPY --from=builder /usr/local/share/tor/ /usr/local/share/tor/.
-RUN apt-get update && apt-get install -y libevent-2.1-7 libcap2 && apt-get clean &&\
+# COPY --from=builder /lib/x86_64-linux-gnu/libcap.* /lib/x86_64-linux-gnu/libcap/. 
+# COPY --from=builder /usr/lib/x86_64-linux-gnu/libevent-* /usr/lib/x86_64-linux-gnu/.
+# /lib/x86_64-linux-gnu/libcap-ng.so.0.0.0
+# /lib/x86_64-linux-gnu/libcap.so.2.44
+# /usr/lib/x86_64-linux-gnu/libevent-2.1.so.7.0.1
+RUN apt-get update && apt-get install -y libevent-2* libcap2 && apt-get clean &&\
     rm -rf /var/lib/apt/lists/* &&\
     mkdir /usr/local/etc/tor/ &&\
     echo "DataDirectory $DataDirectory" > /usr/local/etc/tor/torrc &&\
