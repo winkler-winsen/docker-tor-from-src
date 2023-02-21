@@ -12,7 +12,13 @@ Thanks to [Jannis Seeman][4] for this great course in Docker [Docker komplett: V
 * EXPOSEPORT: Port that is exposed to host.
 
 ## Environment variables
-Please see torrc.sample file in Github Code section for detailed explanation.
+Please set User ID and Group ID to match existing account in host system for exchange date via volume.
+```
+UNAME="debian-tor"
+UID="1000"
+GID="1000"
+```
+Please see torrc.sample file for detailed explanation.
 ```
 Nickname="nickname"
 ContactInfo="Random Person <nobody AT example dot com>"
@@ -28,7 +34,7 @@ Log="notice stderr"
 ## Docker example:
 ```sh
 docker build --tag debtor .
-docker container create --name debtor -v ${PWD}\usr_local_etc_tor\:/usr/local/etc/tor/ debtor
+docker container create --name debtor -e UID=1031 -e GID=100 -v ${PWD}\usr_local_etc_tor\:/usr/local/etc/tor/ debtor
 docker container start debtor
 ```
 
