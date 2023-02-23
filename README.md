@@ -34,7 +34,7 @@ Log="notice stderr"
 ## Docker example:
 ```sh
 docker build --tag debtor .
-docker container create --name debtor -e UID=1031 -e GID=100 -v ${PWD}\usr_local_etc_tor\:/usr/local/etc/tor/ debtor
+docker container create --name debtor -e UID=1031 -e GID=100 -v ${PWD}\usr_local_etc_tor\:/usr/local/etc/tor/ -p 4431:9050 debtor
 docker container start debtor
 ```
 
