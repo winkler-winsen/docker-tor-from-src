@@ -9,6 +9,7 @@ echo "ORPort $ORPortListen NoAdvertise" >> /usr/local/etc/tor/torrc
 echo "ExitRelay $ExitRelay" >> /usr/local/etc/tor/torrc 
 echo "SocksPort $SocksPort" >> /usr/local/etc/tor/torrc 
 echo "Log $Log" >> /usr/local/etc/tor/torrc 
+echo "ExtendAllowPrivateAddresses 1" >> /usr/local/etc/tor/torrc 
 
 groupadd -g $GID -o $UNAME
 useradd -M -u $UID -g $GID -o -s /bin/false $UNAME
