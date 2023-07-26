@@ -1,5 +1,5 @@
 FROM debian:stable-slim AS builder
-ARG TORVER=0.4.7.13\
+ARG TORVER=0.4.7.14\
     CompilerThreads=4
 
 RUN apt-get  update && apt-get upgrade -y && apt-get install -y build-essential libssl-dev liblzma-dev libzstd-dev libcap-dev liblzma-dev libzstd-dev libcap-dev libevent-dev zlib1g-dev openssl pkg-config python3 wget sudo &&\
@@ -32,7 +32,7 @@ EXPOSE ${EXPOSEPORT}
 COPY --from=builder /usr/local/bin/tor* /usr/local/bin/
 COPY --from=builder /usr/local/share/tor/ /usr/local/share/tor/
 COPY entrypoint.sh /
-RUN apt-get update && apt-get install -y sudo libevent-2* libcap2 && apt-get clean &&\
+RUN apt-get update && apt-get install -y sudo libevent-2* libcap2 openssl && apt-get clean &&\
     rm -rf /var/lib/apt/lists/* &&\
     mkdir -p /usr/local/etc/tor/
 
