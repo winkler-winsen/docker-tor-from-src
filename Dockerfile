@@ -1,5 +1,5 @@
 FROM debian:stable-slim AS builder
-ARG TORVER=0.4.8.6\
+ARG TORVER=0.4.8.7\
     CompilerThreads=4
 
 RUN apt-get  update && apt-get upgrade -y && apt-get install -y build-essential libssl-dev liblzma-dev libzstd-dev libcap-dev liblzma-dev libzstd-dev libcap-dev libevent-dev zlib1g-dev openssl pkg-config python3 wget sudo &&\
